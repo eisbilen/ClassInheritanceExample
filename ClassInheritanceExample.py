@@ -1,15 +1,10 @@
 import pandas as pd
 import random
 
-PATH = "/Users/erdemisbilen/Lessons/"
+PATH = ""
 FILE_NAME_01 = "data_by_artists.csv"
 FILE_NAME_02 = "data_by_genres.csv"
 
-def gNews():
-    return True
-
-def cImage():
-    return False
 
 class CSVGetInfo:
     """ This class displays the summary of the tabular data contained in a CSV file """
@@ -21,9 +16,6 @@ class CSVGetInfo:
         self.path = path
         self.file_name = file_name
         print("CSVGetInfo class object has been instantiated")
-
-def cText():
-    return 1
 
     # Instance Method
     def display_summary(self):
