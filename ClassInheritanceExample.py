@@ -1,5 +1,8 @@
 import pandas as pd
 import random
+import requests
+
+from bs4 import BeautifulSoup
 
 PATH = ""
 FILE_NAME_01 = "data_by_artists.csv"
@@ -33,11 +36,11 @@ class CSVGetInfo:
 
     @classmethod
     def read_file_1(cls):
-        return cls("/Users/erdemisbilen/Lessons/", "data_by_artists.csv")
+        return cls("", "data_by_artists.csv")
     
     @classmethod
     def read_file_2(cls):
-        return cls("/Users/erdemisbilen/Lessons/", "data_by_genres.csv")
+        return cls("", "data_by_genres.csv")
 
     # Static Methods
     @staticmethod
@@ -60,9 +63,31 @@ class CSVGetDetails(CSVGetInfo):
 
     @classmethod
     def read_file_1(cls, column_name):
-        return cls("/Users/erdemisbilen/Lessons/", "data_by_artists.csv", column_name)
+        return cls("", "data_by_artists.csv", column_name)
 
 if __name__ == '__main__':
 
     data = CSVGetDetails.read_file_1("danceability")    
     data.display_column_summary()
+
+
+    URL = "https://realpython.github.io/fake-jobs/"
+    page = requests.get(URL)
+
+    soup = BeautifulSoup(page.content, "html.parser")
+    results = soup.find(id="ResultsContainer")
+
+
+    job_elements = results.find_all("div", class_="card-content")
+
+    for job_element in job_elements:
+        print(job_element, end="\n"*2)
+    
+    for job_element in job_elements:
+        title_element = job_element.find("h2", class_="title")
+        company_element = job_element.find("h3", class_="company")
+        location_element = job_element.find("p", class_="location")
+        print(title_element)
+        print(company_element)
+        print(location_element)
+        print()
